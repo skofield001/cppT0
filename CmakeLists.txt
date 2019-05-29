@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.10)
+set(cmake_c_compiler "g++")
+set(cmake_position_independent_code on)
+set(cmake_cxx_standard 11)
+#add_definitions("-g -Wall -Werror")
+add_definitions("-g")
+#set(CMAKE_CXX_FLAGS "-fsanitize=leak -fsanitize=address -fno-omit-frame-pointer")
+
+include_directories(${CMAKE_SOURCE_DIR}/include)
+link_directories(${CMAKE_SOURCE_DIR}/lib)
+
+add_executable(sim_trade_by_ret sim_trade_by_ret.cpp)
+target_link_libraries(sim_trade_by_ret alpha_base alphas factorlist_gen)
+
+add_executable(tc_trade tc_trade.cpp)
+target_link_libraries(tc_trade alpha_base alphas factorlist_gen)
+
+add_executable(lock_test lock_test.cpp)
+target_link_libraries(lock_test pthread)
+
+
+add_executable(case_tc_test case_tc_test.cpp)
+target_link_libraries(case_tc_test alpha_base alphas factorlist_gen)
